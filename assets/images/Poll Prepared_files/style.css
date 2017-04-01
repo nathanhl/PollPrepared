@@ -1,0 +1,55 @@
+.image {
+    width: 100%;
+}
+
+body {
+    background-image: url("../images/votingbanner1.jpg");
+}
+
+.navbar {
+    background-color: white;
+    color: red;
+}
+
+.form-control {
+    max-width: 1006px;
+}
+
+.navbar {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+
+a {
+    color: white;
+}
+
+.jumbotron {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+    color: white;
+    text-align: center;
+    min-height: 550px;
+}
+
+h2 {
+    font-size: 80px;
+    color:white;
+    font-family: 'Work Sans', sans-serif;
+}
+h3{
+	font-size:30px;
+	color:white;
+	font-family: 'Work Sans', sans-serif;
+
+}
+
+.form-group{
+	width:50%;
+}
+
+.navbar-form .form-control{
+	width:100%;
+}

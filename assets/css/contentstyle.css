@@ -1,0 +1,55 @@
+body {
+    bac kground-image: url("../images/starsbackground.png");
+    width: 100%;
+    background-color:#99ddf7;
+}
+
+.navbar {
+    background: #b22028;
+    border-color: transparent;
+    color: white;
+    text-family: georgia;
+}
+
+img {
+    width: 201px;
+    padding-bottom: 10px;
+}
+
+.image {
+    width: 100%;
+}
+
+a {
+    color: white;
+}
+
+.btn {
+    color: black;
+    background-color: red;
+    margin-right: 15px;
+
+}
+
+#voteButtonDiv {
+    margin-right: 5px;
+}
+
+#voteButtonEnglish {
+    margin-right: 5px:
+}
+
+.voters {
+    width: 180px;
+}
+
+.panel-heading {
+    background-color: #b22028;
+    color: white;
+    text-shadow: -1.5px 1.5px #000000;
+    font-weight: bold;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
