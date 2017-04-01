@@ -10,10 +10,12 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Heebo:800|Work+Sans:900" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 </head>
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <div class="container-fluid">
         <div class="row">
@@ -23,8 +25,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="jumbotron">
-                                <a href="https://www.w3schools.com">
-                                    <img src="assets/images/pollprepared.png" style="width:700px"></a>
+                                <img src="assets/images/pollprepared.png" style="width:700px"></a>
                                 <br>
                                 <h2>
                                 Begin your search here!
@@ -35,12 +36,11 @@
                                 <div>
                                     <form class="navbar-form" role="search">
                                         <div class="form-group">
-                                            <input id="query" type="text" class="form-control" name="query" placeholder="Search Your Zip Code">
+                                            <input id="query" type="type/number" class="form-control" maxlength="5" name="query" placeholder="Search By Zip Code">
                                         </div>
                                         <button id="submitButton" type="submit" class="btn btn-default">
                                             Search
                                         </button>
-
                                     </form>
                                 </div>
                             </div>
@@ -55,15 +55,17 @@
         </div>
     </div>
     </div>
-    <script type="text/javascript">
-
+   <!--  <script type="text/javascript">
     $(document).ready(function() {
 
         $("#submitButton").on("click", function() {
             event.preventDefault();
             var searchTerm = $("#query").val().trim();
 
-            window.location.href="sampleresults.html?zipcode=" + searchTerm;
+            window.location.href = "sampleresults.html?zipcode=" + searchTerm;
         });
     });
-    </script>
+</script> -->
+</body>
+
+</html>

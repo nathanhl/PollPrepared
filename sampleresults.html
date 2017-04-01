@@ -9,7 +9,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="assets/css/contentstyle.css">
     <link href="https://fonts.googleapis.com/css?family=Heebo:800|Work+Sans:900" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="assets/javascript/results.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
@@ -23,7 +25,7 @@
                     </div>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input id="query" type="text" class="form-control" />
+                            <input id="query" class="form-control" maxlength="5" name="query" placeholder="Search By Zip Code">
                         </div>
                         <button id="submitButton" type="submit" class="btn btn-default">
                             Submit
@@ -36,19 +38,27 @@
             <div class="col-md-3" role="Photo">
                 <div class="Profile">
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">Here is where FireBase goes</div>
-                    <div class="panel-body text-center">Yay for Firebase
-                        <br>Pawnee, Indiana</div>
+                <div class="panel">
+                    <div class="panel-heading text-center">How do you like our page?</div>
+                    <div class="panel-body text-center">
+                        <button id="likeButton" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <div id="like"></div>
+                        </button>
+                        <button id="dislikeButton" type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                            <div id="dislike"></div>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="Results">
-                    <div class="panel panel-default">
+                    <div class="panel">
                         <div id="search-script" class="panel-heading"></div>
                         <div class="panel-body">
-                            <div class="panel panel-default">
-                                <div class="panel-heading text-center">Click on a government representative to learn more.</div>
+                            <div class="panel">
+                                <div class="panel-heading text-center">Click on a government representative's name or photo to learn more.</div>
                                 <div id="display-area" class="panel-body text-center"></div>
                             </div>
                         </div>
@@ -72,120 +82,120 @@
                 </div>
             </div>
         </div>
+        <!-- <script type="text/javascript">
+        var myOffices = [];
 
-    <script type="text/javascript">
+        function GetURLParameter(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        };
 
-    var myOffices = [];
+        var zipcodeSearch = GetURLParameter('zipcode');
 
-    function GetURLParameter(sParam) {
-        var sPageURL = window.location.search.substring(1); 
-        var sURLVariables = sPageURL.split('&');
-        for (var i = 0; i < sURLVariables.length; i++) {
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam) {
-                return sParameterName[1];
+        $("#search-script").text("Showing results for: " + zipcodeSearch);
+
+        function mapOfficialsToOffice(officials) {
+
+            var tempIndices = [];
+            var currentIndex;
+
+            // loop through offices (x)
+            for (var x = 0; x < myOffices.length; x++) {
+
+                // for each office grab the official indeces
+                tempIndices = myOffices[x].officialIndices;
+
+                // offices[x].officials = []
+                myOffices[x].officials = [];
+
+                console.log(tempIndices)
+
+                // loop throught those indeces (y)
+                for (var y = 0; y < tempIndices.length; y++) {
+
+                    currentIndex = myOffices[x].officialIndices[y]
+                    myOffices[x].officials[y] = officials[currentIndex]
+                }
             }
         }
-    };
 
-    var zipcodeSearch = GetURLParameter('zipcode');
+        function getSearch() {
 
-    $("#search-script").text("Showing results for: " + zipcodeSearch);
+            var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDiWZZJUOpyQL7T8VuIsgaCY2RIuRBW_h8&address=" + zipcodeSearch;
 
-    function mapOfficialsToOffice(officials) {
-
-        var tempIndices = [];
-        var currentIndex;
-
-        // loop through offices (x)
-        for (var x = 0; x < myOffices.length; x++) {
-
-            // for each office grab the official indeces
-            tempIndices = myOffices[x].officialIndices;
-
-            // offices[x].officials = []
-            myOffices[x].officials = [];
-
-            console.log(tempIndices)
-
-            // loop throught those indeces (y)
-            for (var y = 0; y < tempIndices.length; y++) {
-
-                currentIndex = myOffices[x].officialIndices[y]
-                myOffices[x].officials[y] = officials[currentIndex]
-            }
-        }
-    }
-
-    function getSearch() {
-
-        var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDiWZZJUOpyQL7T8VuIsgaCY2RIuRBW_h8&address=" + zipcodeSearch;
-
-        $.ajax({
-                url: queryURL,
-                method: "GET",
-            })
-            .done(function(response) {
-                console.log(response)
-                myOffices = response.offices;
-                var officials = response.officials
-                mapOfficialsToOffice(officials)
+            $.ajax({
+                    url: queryURL,
+                    method: "GET",
+                })
+                .done(function(response) {
+                    console.log(response)
+                    myOffices = response.offices;
+                    var officials = response.officials
+                    mapOfficialsToOffice(officials)
 
 
-                for (var i = 0; i < myOffices.length; i++) {
+                    for (var i = 0; i < myOffices.length; i++) {
 
-                    var title = myOffices[i].name;
+                        var title = myOffices[i].name;
 
-                    for (var j = 0; j < myOffices[i].officials.length; j++) {
+                        for (var j = 0; j < myOffices[i].officials.length; j++) {
 
-                        var responseDiv = $("<div class='item'>");
+                            var responseDiv = $("<div class='item'>");
 
-                        var politicianName = myOffices[i].officials[j].name;
+                            var politicianName = myOffices[i].officials[j].name;
 
-                        var politicianFull = $("<p>").text(title + ": " + politicianName);
-                        var personImage = $("<img>");
-                        personImage.attr("src", myOffices[i].officials[j].photoUrl);
+                            var politicianFull = $("<p>").text(title + ": " + politicianName);
+                            var personImage = $("<img>");
+                            personImage.attr("src", myOffices[i].officials[j].photoUrl);
 
-                        responseDiv.append(politicianFull);
-                        responseDiv.append(personImage);
+                            responseDiv.append(politicianFull);
+                            responseDiv.append(personImage);
 
-                        responseDiv.attr("click-search", politicianName);
+                            responseDiv.attr("click-search", politicianName);
 
-                        responseDiv.addClass("searchResultDiv");
+                            responseDiv.addClass("searchResultDiv");
 
-                        $("#display-area").append(responseDiv);
+                            $("#display-area").append(responseDiv);
 
+                        };
                     };
-                };
 
-                $(".searchResultDiv").on("click", function() {
-                    event.preventDefault();
+                    $(".searchResultDiv").on("click", function() {
+                        event.preventDefault();
 
-                    var bioSearch = $(this).attr("click-search");
+                        var bioSearch = $(this).attr("click-search");
 
-                    var arrayPlace = (officials.indexOf(bioSearch)) + 1;
+                        for (var k = 0, len = officials.length; k < len; k++) {
+                            if (officials[k].name === bioSearch) {
+                                var arrayPlace = k; // Return as soon as the object is found
+                                break;
+                            }
+                        }
 
-                    window.location.href="samplebio.html?zipcode=" + zipcodeSearch + "&name=" + bioSearch + "&array=" + arrayPlace;
+                        window.location.href = "samplebio.html?zipcode=" + zipcodeSearch + "&name=" + bioSearch + "&array=" + arrayPlace;
+                    });
                 });
+
+        };
+
+        $(document).on("load", getSearch());
+
+        $(document).ready(function() {
+
+            $("#submitButton").on("click", function() {
+                event.preventDefault();
+                var searchTerm = $("#query").val().trim();
+
+                window.location.href = "sampleresults.html?zipcode=" + searchTerm;
             });
-
-    };
-
-$(document).on("load", getSearch());
-
-$(document).ready(function() {
-
-        $("#submitButton").on("click", function() {
-            event.preventDefault();
-            var searchTerm = $("#query").val().trim();
-
-            window.location.href="sampleresults.html?zipcode=" + searchTerm;
         });
-    });
-
-
-</script>
-
+        </script> -->
 </body>
 
 </html>

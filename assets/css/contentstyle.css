@@ -1,5 +1,4 @@
 body {
-    bac kground-image: url("../images/starsbackground.png");
     width: 100%;
     background-color:#99ddf7;
 }
@@ -8,7 +7,6 @@ body {
     background: #b22028;
     border-color: transparent;
     color: white;
-    text-family: georgia;
 }
 
 img {
@@ -43,7 +41,7 @@ a {
     width: 180px;
 }
 
-.panel-heading {
+.panel-heading{
     background-color: #b22028;
     color: white;
     text-shadow: -1.5px 1.5px #000000;
@@ -52,4 +50,16 @@ a {
 
 .navbar-default .navbar-brand {
     color: white;
+}
+
+.newsResultDiv{
+    font-weight: bold;
+    color: blue;
+}
+
+
+img{
+    margin: auto;
+    display: block;
+    width: 100%;
 }
